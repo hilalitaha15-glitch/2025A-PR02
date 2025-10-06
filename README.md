@@ -170,7 +170,7 @@ Pour cela, déterminer une grille 3x3 correspondant aux cases du labyrinthe proc
 
 <img src="imgs/hitbox_scheme.png" width="400" height="400">
 
-### Partie 4 : Recherche (3 points)
+### Partie 4 : Recherche (4 points)
 
 Programmer ne résume pas à compléter des fonctions à trous. Pour cette raison, cette partie fera appel à votre compréhension globale du code et à votre capacité à l'adapter. Votre objectif sera de venir intégrer dans le jeu deux portails de téléportation permettant à Pacman et aux fantômes de se téléporter d'un côté à l'autre du labyrinthe. Ces portails devront être représentés visuellement (un devra être orange et l'autre bleu) et devront être positionnés aléatoirement dans le labyrinthe sur le chemin (valeur 0 dans `self.layout`).
 
