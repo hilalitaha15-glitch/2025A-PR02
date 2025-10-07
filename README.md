@@ -172,7 +172,7 @@ Pour cela, déterminer une grille 3x3 correspondant aux cases du labyrinthe proc
 
 ### Partie 4 : Recherche (4 points)
 
-Programmer ne résume pas à compléter des fonctions à trous. Pour cette raison, cette partie fera appel à votre compréhension globale du code et à votre capacité à l'adapter. Votre objectif sera de venir intégrer dans le jeu deux portails de téléportation permettant à Pacman et aux fantômes de se téléporter d'un côté à l'autre du labyrinthe. Ces portails devront être représentés visuellement (un devra être orange et l'autre bleu) et devront être positionnés aléatoirement dans le labyrinthe sur le chemin (valeur 0 dans `self.layout`).
+Programmer ne résume pas à compléter des fonctions à trous. Pour cette raison, cette partie fera appel à votre compréhension globale du code et à votre capacité à l'adapter. Votre objectif sera de venir intégrer dans le jeu deux portails de téléportation permettant à Pacman et aux fantômes de se téléporter d'un côté à l'autre du labyrinthe. Ces portails devront être représentés visuellement (un devra être orange et l'autre bleu) et devront être positionnés aléatoirement dans le labyrinthe sur le chemin (valeur 0 dans `self.layout`). Entrer dans le portail orange téléportera le joueur dans le portail bleu et vice-versa.
 
 > Concernant l'aspect visuel, vous êtes libre d'utiliser des PNGs ou de dessiner des formes géométriques avec pygame.
 
