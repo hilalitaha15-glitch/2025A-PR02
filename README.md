@@ -1,9 +1,9 @@
 # Projet 2 - Programmation orientée objet avec un jeu Pacman 🟡
 
 ## Directives
-:alarm_clock: Date de remise : 
+:alarm_clock: Date de remise : 30 novembre 23:59
 
-:mailbox_with_mail: À remettre sur Github : 
+:mailbox_with_mail: À remettre sur Github (Pensez à push votre code) 
 
 ## Introduction
 Pacman, jeu d'arcade emblématique et intemporel, constitue un excellent moyen d'explorer les concepts de programmation orientée objet. Dans ce projet, vous découvrirez une implémentation complète du jeu utilisant les principes de programmation orientée objet avec Python et la bibliothèque Pygame.
