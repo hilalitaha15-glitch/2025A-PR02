@@ -60,12 +60,49 @@ class Ghost(GameObject):
             self.last_RL_direction = self.direction
         
         # TODO: Écrire votre code ici
-        
+        if self.direction == 0:  
+            new_x += self.speed
+        elif self.direction == 1:  
+            new_y += self.speed
+        elif self.direction == 2:  
+            new_x -= self.speed
+        elif self.direction == 3:  
+            new_y -= self.speed
+        hitbox = pygame.Rect(new_x, new_y, self.width, self.height)
+
         return new_x, new_y, hitbox
             
     def draw(self, screen):
         """Load ghost image"""
         # TODO: Écrire votre code ici
+        if self.vulnerable:
+            img = "imgs/weak_ghost.png"
+        else:
+            if self.color == "red":
+                img = "imgs/red_ghost.png"
+            elif self.color == "pink":
+                img = "imgs/pink_ghost.png"
+            elif self.color == "blue":
+                img = "imgs/blue_ghost.png"
+            elif self.color == "orange":
+                img = "imgs/orange_ghost.png"
+            else:
+                img = "imgs/red_ghost.png" 
+
+        image = pygame.image.load(img)
+        image = pygame.transform.scale(image, (self.width, self.height))
+
+        if self.last_RL_direction == 2:  
+            image = pygame.transform.flip(image, True, False)
+        
+        if self.step == "right":
+            angle = 10
+        else:
+            angle = -10
+
+        image = pygame.transform.rotate(image, angle)
+
+        screen.blit(image, (self.x, self.y))
     
     def make_vulnerable(self):
         """Make the ghost vulnerable to being eaten"""
@@ -99,12 +136,55 @@ class RedGhost(Ghost):
         pacman_x, pacman_y = pacman.get_position()
         
         # TODO: Écrire votre code ici
+        dx = pacman_x - self.x
+        dy = pacman_y - self.y
+
+        if abs(dx) >= abs(dy):
+            self.direction = 0 if dx > 0 else 2
+        else:
+            self.direction = 1 if dy > 0 else 3
+
+        new_x, new_y, hitbox = self.get_next_position()
+        if hitbox is None:
+            hitbox = pygame.Rect(new_x, new_y, self.width, self.height)
+
+        if maze.is_wall_collision(hitbox):
+            self.direction = random.randint(0, 3)
+            new_x, new_y, hitbox = self.get_next_position()
+            if hitbox is None:
+                hitbox = pygame.Rect(new_x, new_y, self.width, self.height)
+            if maze.is_wall_collision(hitbox):
+                return
+
+        self.x = new_x
+        self.y = new_y
 
     def flee_from_pacman(self, maze, pacman):
         """Run away from Pacman when vulnerable"""
         pacman_x, pacman_y = pacman.get_position()
         
         # TODO: Écrire votre code ici
+        dx = pacman_x - self.x
+        dy = pacman_y - self.y
+
+       
+        if abs(dx) >= abs(dy):
+            
+            self.direction = 2 if dx > 0 else 0  
+        else:
+           
+            self.direction = 3 if dy > 0 else 1  
+
+        new_x, new_y, hitbox = self.get_next_position()
+
+        if maze.is_wall_collision(hitbox):
+            self.direction = random.randint(0, 3)
+            new_x, new_y, hitbox = self.get_next_position()
+            if maze.is_wall_collision(hitbox):
+                return  
+
+        self.x = new_x
+        self.y = new_y
 
 class PinkGhost(Ghost):
     """Pink ghost - tries to ambush Pacman"""
@@ -115,13 +195,13 @@ class PinkGhost(Ghost):
     def move(self, maze, pacman):
         """Ambush movement - try to get ahead of Pacman"""
         if self.vulnerable:
-            super().move(maze, pacman)  # Random movement when vulnerable
+            super().move(maze, pacman)  
         else:
             self.ambush_pacman(maze, pacman)
 
     def ambush_pacman(self, maze, pacman):
         """Try to position ahead of Pacman"""
-        # Try to position ahead of Pacman
+    
         pacman_x, pacman_y = pacman.get_position()
         
         # TODO: Écrire votre code ici
