@@ -21,6 +21,14 @@ class Pacman(GameObject):
     def handle_input(self, key):
         """Handle keyboard input for movement"""
         # TODO: Écrire votre code ici
+        if key == pygame.K_RIGHT:
+            self.next_direction = 0
+        elif key == pygame.K_DOWN:
+            self.next_direction = 1
+        elif key == pygame.K_LEFT:
+            self.next_direction = 2
+        elif key == pygame.K_UP:
+            self.next_direction = 3
 
     def update(self, maze):
         """Update Pacman's position and state"""
@@ -50,7 +58,16 @@ class Pacman(GameObject):
         hitbox = None
 
         # TODO: Écrire votre code ici
-        
+
+        if self.next_direction == 0:  
+            new_x += self.speed
+        elif self.next_direction == 1:  
+            new_y += self.speed
+        elif self.next_direction == 2:  
+            new_x -= self.speed
+        elif self.next_direction == 3:  
+            new_y -= self.speed
+        hitbox = pygame.Rect(new_x, new_y, self.width, self.height)
         return new_x, new_y, hitbox
     
     def draw(self, screen):
@@ -61,9 +78,47 @@ class Pacman(GameObject):
 
         # TODO: Écrire votre code ici
         # Draw Pacman body
+        pygame.draw.circle(screen, YELLOW, (center_x, center_y), radius)
+        if self.direction == 0:     
+            angle_milieu = 0
+        elif self.direction == 1:    
+            angle_milieu = 90
+        elif self.direction == 2:   
+            angle_milieu = 180
+        else:                       
+            angle_milieu = 270
+        angle_bouche = 40  
+
+        a1 = math.radians(angle_milieu - angle_bouche / 2)
+        a2 = math.radians(angle_milieu + angle_bouche / 2)
+
+        p1 = (center_x, center_y)
+        p2 = (center_x + radius * math.cos(a1),
+                center_y - radius * math.sin(a1))
+        p3 = (center_x + radius * math.cos(a2),
+                center_y - radius * math.sin(a2))
+
+        pygame.draw.polygon(screen, BLACK, [p1, p2, p3])
 
         # Draw Pacman eye
-    
+        eye_offset = radius // 2
+        eye_x, eye_y = center_x, center_y
+
+        if self.direction == 0:     
+            eye_x = center_x + eye_offset // 2
+            eye_y = center_y - eye_offset // 2
+        elif self.direction == 1:   
+            eye_x = center_x + eye_offset // 2
+            eye_y = center_y + eye_offset // 4
+        elif self.direction == 2:    
+            eye_x = center_x - eye_offset // 2
+            eye_y = center_y - eye_offset // 2
+        elif self.direction == 3:   
+            eye_x = center_x - eye_offset // 2
+            eye_y = center_y - eye_offset
+
+        pygame.draw.circle(screen, BLACK, (int(eye_x), int(eye_y)), radius // 6)
+
     def reset_position(self):
         """Reset Pacman to starting position"""
         self.x = self.start_x - self.width // 2
