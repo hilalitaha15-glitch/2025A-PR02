@@ -83,11 +83,12 @@ class Game:
         if self.game_state == PLAYING:
             # Update pacman
             self.pacman.update(self.maze)
-            
             # Update ghosts
             for ghost in self.ghosts:
                 ghost.update(self.maze, self.pacman)
-            
+            self.maze.portal_teleportation(self.pacman)
+            for ghost in self.ghosts:
+                self.maze.portal_teleportation(ghost)
             # Check collisions
             self.check_collisions()
             
