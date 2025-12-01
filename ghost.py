@@ -20,6 +20,7 @@ class Ghost(GameObject):
         self.last_RL_direction = 0
         self.x = x - self.width // 2
         self.y = y - self.height // 2
+        self.last_teleport_time = 0
 
     def update(self, maze, pacman):
         """Update ghost position and state"""
