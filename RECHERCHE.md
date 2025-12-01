@@ -12,5 +12,5 @@ self.maze.handle_portal_teleport(self.pacman)
 for ghost in self.ghosts:
     self.maze.handle_portal_teleport(ghost)
 
-
 Ces lignes permettent à Pacman et aux fantômes d’être téléportés automatiquement lorsqu’ils touchent un portail.
+Égalment l'ajout de self.last_teleport_time = 0 qui permet d'enregistrer le moment où l’objet a été téléporté pour la dernière fois, et elle permet au cooldown de fonctionner.
