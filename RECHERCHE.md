@@ -5,3 +5,12 @@ J’ai corrigé ces problèmes en ajoutant un return et en réorganisant l’ord
 
 Une fois les portails placés, j’ai ajouté la téléportation de Pacman et des fantômes.
 J’ai ensuite corrigé un bug où Pacman se téléportait en boucle en ajoutant un système de cooldown de 0,3 seconde.
+
+Dans game.py, j’ai ajouté l’appel à la téléportation dans la boucle d’update :
+
+self.maze.handle_portal_teleport(self.pacman)
+for ghost in self.ghosts:
+    self.maze.handle_portal_teleport(ghost)
+
+
+Ces lignes permettent à Pacman et aux fantômes d’être téléportés automatiquement lorsqu’ils touchent un portail.
