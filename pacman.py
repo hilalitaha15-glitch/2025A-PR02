@@ -17,6 +17,7 @@ class Pacman(GameObject):
         self.mouth_timer = 0
         self.x = x - self.width // 2
         self.y = y - self.height // 2
+        self.last_teleport_time = 0
 
     def handle_input(self, key):
         """Handle keyboard input for movement"""
